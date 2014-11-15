@@ -110,7 +110,7 @@ function connect(resultCallback) {
       console.log(err.message);
     }
     
-    return resultCallback(connection);
+    return resultCallback();
   });
 }
 
