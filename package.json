@@ -2,7 +2,9 @@
   "name": "counterApp",
   "description": "People Passing",
   "version": "0.0.1",
-  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
   "private": true,
   "dependencies": {
     "async": "0.x",
