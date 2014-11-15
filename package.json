@@ -1,0 +1,14 @@
+{
+  "name": "counterApp",
+  "description": "People Passing",
+  "version": "0.0.1",
+  "private": true,
+  "dependencies": {
+    "async": "0.x",
+    "body-parser": "1.x",
+    "express": "4.x",
+    "madlibs": "0.x",
+    "mysql": "2.x",
+    "node-uuid": "1.x"
+  }
+}
