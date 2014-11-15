@@ -61,7 +61,7 @@ function getIdByValue(table, column, value, callback) {
       console.log(err.message);
     }
 
-    if (rows.length != 0) {
+    if (rows.length !== 0) {
       var result = rows[0];
       console.log(result);
       return callback(result.id);

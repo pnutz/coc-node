@@ -10,10 +10,7 @@ var User = require("./model/user");
 async.series([
   // setup database
   function(callback) {
-    mysql.connect(function(connection) {
-      global.db = connection;
-      return callback();
-    });
+    mysql.connect(callback);
   },
   // check if database contains message data
   function(callback) {

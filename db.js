@@ -32,6 +32,7 @@ function initHandleDisconnect(callback) {
     }
   });
   
+  global.db = connection;
   return callback();
 }
 
@@ -55,6 +56,8 @@ function handleDisconnect() {
       throw err;
     }
   });
+  
+  global.db = connection;
 }
 
 function connect(resultCallback) {
