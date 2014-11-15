@@ -17,7 +17,8 @@ function start() {
 
   app.use(bodyParser.json());
   
-  var server = app.listen(port, function() {
+  // use heroku's environment port (not assigned port)
+  var server = app.listen(process.env.PORT || port, function() {
     console.log("Express Server Listening on Port %d in %s mode", server.address().port, app.settings.env);
   });
   
