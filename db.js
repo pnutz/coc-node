@@ -3,10 +3,10 @@ var async = require("async");
 var script = require("./mysql_db/cocDB");
 
 var db_config = {
-  host: "localhost",
-  user: "root",
-  password: "root"
-  //database: "counterApp"
+  host: "us-cdbr-iron-east-01.cleardb.net",
+  user: "baae06c4c30b89",
+  password: "9b5bfc63",
+  database: "heroku_06d5fed0deeebe4"
 };
 
 function connect(resultCallback) {
