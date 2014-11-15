@@ -9,18 +9,58 @@ var db_config = {
   database: "heroku_06d5fed0deeebe4"
 };
 
-function connect(resultCallback) {
-  var connection = mysql.createConnection(db_config);
+var connection;
+
+function initHandleDisconnect(callback) {
+  connection = mysql.createConnection(db_config);
   
+  connection.connect(function(err) {
+    if (err) {
+      console.log('Error when connecting to DB:', err);
+      setTimeout(handleDisconnect, 2000);
+    }
+    console.log("Connected to MySQL Database");
+  });
+  
+  // connection lost due to server restart, connection idle timeout
+  connection.on('error', function(err) {
+    console.log('DB Error', err);
+    if (err.code === 'PROTOCOL_CONNECTION_LOST') {
+      handleDisconnect();
+    } else {
+      throw err;
+    }
+  });
+  
+  return callback();
+}
+
+function handleDisconnect() {
+  connection = mysql.createConnection(db_config);
+  
+  connection.connect(function(err) {
+    if (err) {
+      console.log('Error when connecting to DB:', err);
+      setTimeout(handleDisconnect, 2000);
+    }
+    console.log("Reconnected to MySQL Database");
+  });
+  
+  // connection lost due to server restart, connection idle timeout
+  connection.on('error', function(err) {
+    console.log('DB Error', err);
+    if (err.code === 'PROTOCOL_CONNECTION_LOST') {
+      handleDisconnect();
+    } else {
+      throw err;
+    }
+  });
+}
+
+function connect(resultCallback) {
   async.series([
     function(callback) {
-      connection.connect(function(err) {
-        if (err) {
-          throw err;
-        }
-        console.log("Connected to MySQL Database");
-        return callback();
-      });
+      initHandleDisconnect(callback);
     },
     function(callback) {
       var query = script.db;
